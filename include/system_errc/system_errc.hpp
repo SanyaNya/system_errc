@@ -28,6 +28,9 @@ struct ErrorCode
 {
   explicit constexpr ErrorCode(ErrType v) noexcept : m_value_(v) {}
 
+  constexpr bool operator==(ErrorCode ec) const noexcept { return m_value_ == ec.m_value_; }
+  constexpr bool operator!=(ErrorCode ec) const noexcept { return m_value_ != ec.m_value_; }
+
   ErrType m_value_;
 };
 
