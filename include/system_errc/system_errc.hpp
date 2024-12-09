@@ -14,6 +14,9 @@
   #include <cerrno>
 #endif
 
+#include <cstdint>
+#include <cstring>
+
 namespace sys_errc
 {
 
@@ -24,12 +27,44 @@ using ErrType =
   decltype(errno);
 #endif
 
+template<typename CharT, std::size_t Size>
+struct cstring
+{
+  constexpr CharT* data() noexcept { return m_str_; }
+  constexpr const CharT* data() const noexcept { return m_str_; }
+
+  constexpr std::size_t capacity() const noexcept { return Size; }
+
+private:
+  CharT m_str_[Size];
+};
+
 struct ErrorCode
 {
+#if SYSERRC_WIN_IMPL
+  using msg_type = cstring<wchar_t, 256>;
+#elif SYSERRC_POSIX_IMPL
+  using msg_type = cstring<char, 256>;
+#endif
+
   explicit constexpr ErrorCode(ErrType v) noexcept : m_value_(v) {}
 
   constexpr bool operator==(ErrorCode ec) const noexcept { return m_value_ == ec.m_value_; }
   constexpr bool operator!=(ErrorCode ec) const noexcept { return m_value_ != ec.m_value_; }
+
+  msg_type message() const noexcept
+  {
+    msg_type msg;
+
+  #if SYSERRC_WIN_IMPL
+	  const int f = FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_MAX_WIDTH_MASK;
+	  FormatMessageW(f, 0, m_value_, 0, msg.data(), msg.capacity(), 0);
+  #elif SYSERRC_POSIX_IMPL
+	  strerror_r(m_value_, msg.data(), msg.capacity());
+  #endif
+
+    return msg;
+  }
 
   ErrType m_value_;
 };
