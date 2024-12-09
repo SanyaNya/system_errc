@@ -50,3 +50,6 @@ inline void set_error(ErrType e) noexcept
 }
 
 } //namespace sys_errc
+
+#undef SYSERRC_WIN_IMPL
+#undef SYSERRC_POSIX_IMPL
