@@ -45,7 +45,7 @@ struct ErrorCode
   using char_type = char;
 #endif
 
-  explicit constexpr ErrorCode(ErrType v) noexcept : m_value_(v) {}
+  constexpr ErrorCode(ErrType v) noexcept : m_value_(v) {}
 
   constexpr bool operator==(ErrorCode ec) const noexcept { return m_value_ == ec.m_value_; }
   constexpr bool operator!=(ErrorCode ec) const noexcept { return m_value_ != ec.m_value_; }
