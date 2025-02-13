@@ -14,4 +14,5 @@ include(Fetch)
 fetch_project(hpp https://github.com/SanyaNya/hpp v1.2.0)
 
 add_library(system_errc INTERFACE)
+target_link_libraries(system_errc INTERFACE hpp)
 target_include_directories(system_errc INTERFACE ${system_errc_SOURCE_DIR}/include)
