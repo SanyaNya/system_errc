@@ -11,7 +11,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 include(Fetch)
 
-fetch_project(hpp https://github.com/SanyaNya/hpp v1.2.0)
+fetch_project(hpp https://github.com/SanyaNya/hpp v1.5.0)
 
 add_library(system_errc INTERFACE)
 target_link_libraries(system_errc INTERFACE hpp)

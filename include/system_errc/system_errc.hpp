@@ -1,6 +1,7 @@
 #pragma once
 
-#include <hpp/define.hpp>
+#include <hpp/platform.hpp>
+#include <hpp/if.hpp>
 
 #if HPP_WIN_IMPL
   #include <WinError.h>
