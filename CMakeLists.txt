@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.31)
 
-project(system_errc 0.5.3)
+project(system_errc VERSION 0.5.4)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
