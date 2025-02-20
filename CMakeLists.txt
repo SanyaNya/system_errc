@@ -1,17 +1,19 @@
 cmake_minimum_required(VERSION 3.31)
 
-project(system_errc VERSION 0.5.4)
-
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+project(system_errc VERSION 0.6.0)
 
 #Require C++23 without compiler extensions
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-include(Fetch)
+file(
+  DOWNLOAD
+  https://github.com/cpm-cmake/CPM.cmake/releases/download/v0.40.5/CPM.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/cmake/CPM.cmake)
+include(${CMAKE_CURRENT_BINARY_DIR}/cmake/CPM.cmake)
 
-fetch_project(hpp https://github.com/SanyaNya/hpp v1.5.0)
+CPMAddPackage("gh:SanyaNya/hpp@1.6.1")
 
 add_library(system_errc INTERFACE)
 target_link_libraries(system_errc INTERFACE hpp)
