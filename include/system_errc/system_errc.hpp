@@ -17,12 +17,7 @@
 namespace sys_errc
 {
 
-using ErrType =
-#if HPP_WIN_IMPL
-  decltype(GetLastError());
-#elif HPP_POSIX_IMPL
-  decltype(errno);
-#endif
+using ErrType = HPP_IFE(HPP_WIN_IMPL)(DWORD)(int);
 
 struct ErrorCode
 {

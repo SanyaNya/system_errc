@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.31)
 
-project(system_errc VERSION 0.6.0)
+project(system_errc VERSION 0.6.1)
 
 #Require C++23 without compiler extensions
 set(CMAKE_CXX_STANDARD 23)
